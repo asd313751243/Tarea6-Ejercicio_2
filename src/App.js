@@ -5,6 +5,7 @@ import ButtonOp from './Components/ButtonOp';
 import ButtonCl from './Components/ButtonCl'
 import ButtonEq from './Components/ButtonEq';
 import Input from './Components/Input'
+import * as math from 'mathjs';
 
 class App extends Component {
 
@@ -31,7 +32,8 @@ class App extends Component {
     if(this.state.input.charAt(this.state.input.length-1) === "/" ||
     this.state.input.charAt(this.state.input.length-1) === "*" ||
     this.state.input.charAt(this.state.input.length-1) === "-" ||
-    this.state.input.charAt(this.state.input.length-1) === "+"){
+    this.state.input.charAt(this.state.input.length-1) === "+" ||
+    this.state.input.charAt(this.state.input.length-1) === ""){
       val="";
     }
     this.setState({
@@ -48,6 +50,12 @@ class App extends Component {
     }
     this.setState({
       input: this.state.input + val
+    })
+  }
+
+  Calc = () => {
+    this.setState({
+      input: math.evaluate(this.state.input)
     })
   }
 
@@ -81,7 +89,7 @@ class App extends Component {
             <ButtonOp handleClick={this.OpToInput}>+</ButtonOp>
           </div>
           <div className = "row">
-            <ButtonEq>=</ButtonEq>
+            <ButtonEq handleEqual={this.Calc}>=</ButtonEq>
           </div>
         </div>
       </div>
