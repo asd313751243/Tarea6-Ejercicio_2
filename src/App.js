@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Button from './Components/Button';
 import ButtonOp from './Components/ButtonOp';
+import ButtonCl from './Components/ButtonCl'
 import ButtonEq from './Components/ButtonEq';
 import Input from './Components/Input'
 
@@ -14,34 +15,70 @@ class App extends Component {
     };
   }
 
+  Clear = () => {
+    this.setState({
+      input: ""
+    })
+  }
+
+  ToInput = (val) => {
+      this.setState({
+        input: this.state.input + val
+      })
+  }
+
+  OpToInput = (val) => {
+    if(this.state.input.charAt(this.state.input.length-1) === "/" ||
+    this.state.input.charAt(this.state.input.length-1) === "*" ||
+    this.state.input.charAt(this.state.input.length-1) === "-" ||
+    this.state.input.charAt(this.state.input.length-1) === "+"){
+      val="";
+    }
+    this.setState({
+      input: this.state.input + val
+    })
+  }
+
+  PunToInput = (val) => {
+    if(this.state.input.indexOf('.') != -1){
+      val = "";
+    }
+    if(this.state.input == ""){
+      this.state.input = 0;
+    }
+    this.setState({
+      input: this.state.input + val
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <div className="calc-wrapper">
             <Input input={this.state.input}></Input>
           <div className = "row">
-            <Button>7</Button>
-            <Button>8</Button>
-            <Button>9</Button>
-            <ButtonOp>/</ButtonOp>
+            <Button handleClick={this.ToInput}>7</Button>
+            <Button handleClick={this.ToInput}>8</Button>
+            <Button handleClick={this.ToInput}>9</Button>
+            <ButtonOp handleClick={this.OpToInput}>/</ButtonOp>
           </div>
           <div className = "row">
-            <Button>4</Button>
-            <Button>5</Button>
-            <Button>6</Button>
-            <ButtonOp>*</ButtonOp>
+            <Button handleClick={this.ToInput}>4</Button>
+            <Button handleClick={this.ToInput}>5</Button>
+            <Button handleClick={this.ToInput}>6</Button>
+            <ButtonOp handleClick={this.OpToInput}>*</ButtonOp>
           </div>
           <div className = "row">
-            <Button>1</Button>
-            <Button>2</Button>
-            <Button>3</Button>
-            <ButtonOp>-</ButtonOp>
+            <Button handleClick={this.ToInput}>1</Button>
+            <Button handleClick={this.ToInput}>2</Button>
+            <Button handleClick={this.ToInput}>3</Button>
+            <ButtonOp handleClick={this.OpToInput}>-</ButtonOp>
           </div>
           <div className = "row">
-            <Button>.</Button>
-            <Button>0</Button>
-            <Button>c</Button>
-            <ButtonOp>+</ButtonOp>
+            <Button handleClick={this.PunToInput}>.</Button>
+            <Button handleClick={this.ToInput}>0</Button>
+            <ButtonCl handleClear={this.Clear}>c</ButtonCl>
+            <ButtonOp handleClick={this.OpToInput}>+</ButtonOp>
           </div>
           <div className = "row">
             <ButtonEq>=</ButtonEq>
