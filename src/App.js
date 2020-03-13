@@ -36,9 +36,12 @@ class App extends Component {
     this.state.input.charAt(this.state.input.length-1) === ""){
       val="";
     }
-    this.setState({
-      input: this.state.input + val
-    })
+    else{
+      this.setState({
+        input: this.state.input + val
+      })
+    }
+
   }
 
   PunToInput = (val) => {
@@ -54,6 +57,20 @@ class App extends Component {
   }
 
   Calc = () => {
+
+
+    let ID = localStorage.getItem('Operations');
+    if(ID == null){
+      ID = 0;
+    }
+    let history = {
+      Operation: this.state.input,
+      Result: math.evaluate(this.state.input)
+    }
+    ID++;
+    localStorage.setItem("Operations", ID);
+    localStorage.setItem(ID, JSON.stringify(history))
+
     this.setState({
       input: math.evaluate(this.state.input)
     })
