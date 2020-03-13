@@ -1,0 +1,11 @@
+.input-wrapper{
+    height: 5em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.4em;
+    background-color:#aac0d1;
+    color: #121831;
+    outline: 1px solid #888888;
+}
