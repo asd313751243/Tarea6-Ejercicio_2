@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './History.css'
-import ButtonCal from './Components/ButtonCal'
 
 class History extends Component{
 
@@ -21,9 +20,6 @@ class History extends Component{
     render(){
         return(
             <div className="History">
-
-                <ButtonCal/>
-                
                <table className="table table-striped table-dark">
                    <thead>
                         <th>Operations</th>

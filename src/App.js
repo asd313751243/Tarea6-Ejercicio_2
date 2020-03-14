@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import ButtonHis from './Components/ButtonHis';
 import Button from './Components/Button';
 import ButtonOp from './Components/ButtonOp';
 import ButtonCl from './Components/ButtonCl'
@@ -87,9 +86,6 @@ class App extends Component {
     return (
       <div className="App">  
         <div className="calc-wrapper">
-          <div className="row">
-            <ButtonHis>History</ButtonHis>
-          </div>  
           <div className="row">
             <Input input={this.state.input}></Input>
           </div>
