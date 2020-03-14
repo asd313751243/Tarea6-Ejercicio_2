@@ -61,25 +61,35 @@ class App extends Component {
 
   Calc = () => {
 
-    let history = {
-      Operation: this.state.input,
-      Result: math.evaluate(this.state.input)
-    }
+    if(this.state.input.charAt(this.state.input.length-1) === "/" ||
+    this.state.input.charAt(this.state.input.length-1) === "*" ||
+    this.state.input.charAt(this.state.input.length-1) === "-" ||
+    this.state.input.charAt(this.state.input.length-1) === "+"){
 
-    if(localStorage.getItem('Histories') == null){
-      let histories = [];
-      histories.push(history);
-      localStorage.setItem("Histories", JSON.stringify(histories));
+      return null;
+
     }
     else{
-      let histories = JSON.parse(localStorage.getItem('Histories'));
-      histories.push(history);
-      localStorage.setItem("Histories", JSON.stringify(histories));
-    }
+      let history = {
+        Operation: this.state.input,
+        Result: math.evaluate(this.state.input)
+      }
 
-    this.setState({
-      input: math.evaluate(this.state.input)
-    })
+      if(localStorage.getItem('Histories') == null){
+        let histories = [];
+        histories.push(history);
+        localStorage.setItem("Histories", JSON.stringify(histories));
+      }
+      else{
+        let histories = JSON.parse(localStorage.getItem('Histories'));
+        histories.push(history);
+        localStorage.setItem("Histories", JSON.stringify(histories));
+      }
+
+      this.setState({
+        input: math.evaluate(this.state.input)
+      })
+    }
   }
 
   render() {
