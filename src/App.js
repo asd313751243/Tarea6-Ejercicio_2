@@ -64,7 +64,8 @@ class App extends Component {
     if(this.state.input.charAt(this.state.input.length-1) === "/" ||
     this.state.input.charAt(this.state.input.length-1) === "*" ||
     this.state.input.charAt(this.state.input.length-1) === "-" ||
-    this.state.input.charAt(this.state.input.length-1) === "+"){
+    this.state.input.charAt(this.state.input.length-1) === "+" ||
+    this.state.input.length <= 0){
 
       return null;
 
