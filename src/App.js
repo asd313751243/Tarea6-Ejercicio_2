@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import ButtonHis from './Components/ButtonHis';
 import Button from './Components/Button';
 import ButtonOp from './Components/ButtonOp';
 import ButtonCl from './Components/ButtonCl'
 import ButtonEq from './Components/ButtonEq';
 import Input from './Components/Input'
+//Una libreria para hacer evaluaciones de operaciones matematicas
 import * as math from 'mathjs';
+
 
 class App extends Component {
 
@@ -16,6 +19,7 @@ class App extends Component {
     };
   }
 
+  
   Clear = () => {
     this.setState({
       input: ""
@@ -58,18 +62,21 @@ class App extends Component {
 
   Calc = () => {
 
-
-    let ID = localStorage.getItem('Operations');
-    if(ID == null){
-      ID = 0;
-    }
     let history = {
       Operation: this.state.input,
       Result: math.evaluate(this.state.input)
     }
-    ID++;
-    localStorage.setItem("Operations", ID);
-    localStorage.setItem(ID, JSON.stringify(history))
+
+    if(localStorage.getItem('Histories') == null){
+      let histories = [];
+      histories.push(history);
+      localStorage.setItem("Histories", JSON.stringify(histories));
+    }
+    else{
+      let histories = JSON.parse(localStorage.getItem('Histories'));
+      histories.push(history);
+      localStorage.setItem("Histories", JSON.stringify(histories));
+    }
 
     this.setState({
       input: math.evaluate(this.state.input)
@@ -78,9 +85,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App">  
         <div className="calc-wrapper">
+          <div className="row">
+            <ButtonHis>History</ButtonHis>
+          </div>  
+          <div className="row">
             <Input input={this.state.input}></Input>
+          </div>
           <div className = "row">
             <Button handleClick={this.ToInput}>7</Button>
             <Button handleClick={this.ToInput}>8</Button>

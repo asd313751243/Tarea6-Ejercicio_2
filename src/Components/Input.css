@@ -5,6 +5,7 @@
     align-items: center;
     font-weight: bold;
     font-size: 1.4em;
+    flex: 1;
     background-color:#aac0d1;
     color: #121831;
     outline: 1px solid #888888;
